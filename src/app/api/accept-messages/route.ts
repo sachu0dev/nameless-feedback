@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
   const session = await getServerSession(authOptions);
   const user: User = session?.user as User;
@@ -41,14 +41,15 @@ export async function GET(request: Request) {
   }
 
   const userId = user._id;
+  
   try {
     const foundUser = await UserModel.findById(userId);
 
-    if(!foundUser) {
+    if(!foundUser) {      
       return Response.json({ success: false, message: "Failed to find user" },{status: 404});
     }
 
-    return Response.json({ success: true, message: "User found", isAcceotingMessages: foundUser.isAcceptingMessages },{status: 200});
+    return Response.json({ success: true, message: "User found", isAcceptingMessages: foundUser.isAcceptingMessages },{status: 200});
 
   } catch (error) {
     console.log("Failed to message acceptance status", error);

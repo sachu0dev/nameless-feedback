@@ -18,20 +18,24 @@ export const authOptions: NextAuthOptions = {
         try {
           const user = await UserModel.findOne({ 
             $or: [
-              { email: credentials?.email },
-              { username: credentials?.email }
+              { email: credentials?.identifier },
+              { username: credentials?.identifier }
             ]
            });
            if(!user) {
+            console.log("No user found with this email or username");
+                        
             throw new Error("No user found with this email or username");
            }
 
            if(!user.isVerified){
+            console.log("please verify your email");
             throw new Error("please verify your email");
            }
 
            const isMatch = await bcrypt.compare(credentials?.password, user.password);
            if(!isMatch) {
+            console.log("Incorrect password");
             throw new Error("Incorrect password");
            }
 

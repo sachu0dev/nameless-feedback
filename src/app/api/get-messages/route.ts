@@ -3,9 +3,9 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import { User } from 'next-auth';
 import { authOptions } from "../auth/[...nextauth]/options";
-import { mongoose } from 'mongoose';
+import mongoose from "mongoose";
 
-export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
   const session = await getServerSession(authOptions);
   const user: User = session?.user as User;
@@ -15,17 +15,24 @@ export async function GET(request: Request) {
   }
 
   const userId = new mongoose.Types.ObjectId(user._id);
+  
 
   try {
+    const checkUser = await UserModel.findById(userId);
+
+    if(!checkUser) {
+      return Response.json({ success: false, message: "User not found" },{status: 404});
+    }
     const user = await UserModel.aggregate([
       { $match: { _id: userId } },
       { $unwind: "$messages" },
       { $sort: { "messages.createdAt": -1 } },
       { $group: {_id: '$_id', messages: { $push: "$messages" } } },
     ])
+    
 
     if(!user || user.length === 0) {
-      return Response.json({ success: false, message: "User not found" },{status: 404});
+      return Response.json({ success: true, message: "No messages found" },{status: 200});
     }
 
     return Response.json({ success: true, message: "User found", messages: user[0].messages },{status: 200});
