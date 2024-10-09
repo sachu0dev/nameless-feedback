@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const messages = convertToCoreMessages([{ role: 'user', content: prompt }]);
 
     const result = await streamText({
-      model: openai('gpt-3.5-turbo-instruct'),
+      model: openai('gpt-4o-mini'),
       messages,
     });
 

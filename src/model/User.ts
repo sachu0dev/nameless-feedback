@@ -3,6 +3,7 @@ import mongoose, {Schema, Document} from 'mongoose';
 
 export interface Message extends Document {
   content: string;
+  rating: number;
   createdAt: Date;
 }
 
@@ -11,12 +12,18 @@ const MessageSchema: Schema<Message> = new Schema({
     type: String,
     required: true
   },
+  rating: {
+    type: Number,
+    default: -1
+  },
   createdAt: {
     type: Date,
     default: Date.now,
     required: true
   }
 });
+
+
 export interface User extends Document {
   username: string;
   email: string;

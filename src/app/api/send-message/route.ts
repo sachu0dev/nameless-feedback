@@ -1,29 +1,33 @@
 import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
 import { Message } from "@/model/User";
-import { create } from "domain";
 
 export async function POST(request: Request) {
   await dbConnect();
-  const {username, content} = await request.json();
+  const { username, content, rating } = await request.json();
 
   try {
-    const user = await UserModel.findOne({username});
+    const user = await UserModel.findOne({ username });
     
-    if(!user) {
-      return Response.json({ success: false, message: "User not found" },{status: 404});
+    if (!user) {
+      return Response.json({ success: false, message: "User not found" }, { status: 404 });
     }
 
-    if(!user.isAcceptingMessages) {
-      return Response.json({ success: false, message: "User is not accepting messages" },{status: 403});
+    if (!user.isAcceptingMessages) {
+      return Response.json({ success: false, message: "User is not accepting messages" }, { status: 403 });
     }
 
-    const newMessage = {content, createdAt: new Date()};
-    user.messages.push(newMessage as Message);
-    await user.save();
-    return Response.json({ success: true, message: "Message sent successfully" },{status: 200});
+    const newMessage: Message = { content, rating, createdAt: new Date() };
+    console.log(newMessage);
+    
+    user.messages.push(newMessage);
+    console.log(user);
+    const updatedUser = await user.save();
+    console.log(updatedUser);
+    
+    return Response.json({ success: true, message: "Message sent successfully" }, { status: 200 });
   } catch (error) {
     console.error("Failed to send message", error);
-    return Response.json({ success: false, message: "Failed to send message" },{status: 500});
+    return Response.json({ success: false, message: "Failed to send message" }, { status: 500 });
   }
 }
