@@ -1,7 +1,14 @@
 "use client";
 import { ThemeToggleMode } from "@/components/theme/ThemeToggleMode";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { signInSchema } from "@/schemas/signInSchema";
@@ -15,7 +22,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-
 const Page = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,49 +31,52 @@ const Page = () => {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: '',
-      password: ''
-    }
-  })
-    
+      identifier: "sushil",
+      password: "123456",
+    },
+  });
 
-  const onSubmit = async (data: z.infer<typeof signInSchema>)=> {
+  const onSubmit = async (data: z.infer<typeof signInSchema>) => {
     setIsSubmitting(true);
-    const result = await signIn('credentials', {
+    const result = await signIn("credentials", {
       identifier: data.identifier,
       password: data.password,
-      redirect: false
-    })
+      redirect: false,
+    });
     setIsSubmitting(false);
-    if(result?.error){
+    if (result?.error) {
       console.log(result?.error);
       toast({
-        title: 'Login failed',
-        description: 'Incorrect username or password',
-        variant: 'destructive'
-      })
+        title: "Login failed",
+        description: "Incorrect username or password",
+        variant: "destructive",
+      });
     }
 
-    if(result?.url){
-      router.replace('/dashboard')
+    if (result?.url) {
+      router.replace("/dashboard");
     }
-  }
+  };
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gray-100 dark:bg-slate-950">
       <div className="absolute top-4 right-4 z-10">
-        <ThemeToggleMode/>
+        <ThemeToggleMode />
       </div>
-      <div className="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]">
-        </div>
-      <div className="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]">
-        </div>
+      <div className="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+      <div className="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
 
       <div className="w-full max-w-md p-8 m-8 space-y-8 bg-white dark:bg-[#191919] rounded-lg shadow-md dark:shadow-l dark:shadow-slate-950">
         <div className="text-center flex w-full items-center flex-col">
-          <Image src='/logo/namelessDark.png' alt="Nameless Feedback" width={180} height={180} className="w-[150px] h-[150px] dark:invert" />
+          <Image
+            src="/logo/namelessDark.png"
+            alt="Nameless Feedback"
+            width={180}
+            height={180}
+            className="w-[150px] h-[150px] dark:invert"
+          />
           <h1 className="text-3xl font-extrabold tracking-tight mb-4">
-             Welcome Back
+            Welcome Back
           </h1>
         </div>
         <Form {...form}>
@@ -79,7 +88,12 @@ const Page = () => {
                 <FormItem>
                   <FormLabel>Email or Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="lGkKX@example.com" {...field} icon={<Mail size={16} color="#626262"/>}  className="dark:bg-[#121212] dark:border-[#1B1B1B]   dark:placeholder-[#626262] shadow-inner dark:shadow-[inset_0_2px_2px_rgba(0,0,0,0.6)]" />
+                    <Input
+                      placeholder="lGkKX@example.com"
+                      {...field}
+                      icon={<Mail size={16} color="#626262" />}
+                      className="dark:bg-[#121212] dark:border-[#1B1B1B]   dark:placeholder-[#626262] shadow-inner dark:shadow-[inset_0_2px_2px_rgba(0,0,0,0.6)]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,7 +106,13 @@ const Page = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} icon={<Lock size={16} color="#626262"/>} className="mb-4 dark:bg-[#121212] dark:border-[#1B1B1B]   dark:placeholder-[#626262] shadow-inner dark:shadow-[inset_0_2px_2px_rgba(0,0,0,0.6)]" />
+                    <Input
+                      type="password"
+                      placeholder="••••••••"
+                      {...field}
+                      icon={<Lock size={16} color="#626262" />}
+                      className="mb-4 dark:bg-[#121212] dark:border-[#1B1B1B]   dark:placeholder-[#626262] shadow-inner dark:shadow-[inset_0_2px_2px_rgba(0,0,0,0.6)]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,22 +133,22 @@ const Page = () => {
                   Please wait
                 </>
               ) : (
-                'Sign in'
+                "Sign in"
               )}
             </Button>
           </form>
         </Form>
         <div className="text-center">
-              <p className="text-sm text-[#626262]">
-              Don&lsquo;t have an account?{" "}
-              <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-                Sign up
-              </Link>
-              </p>
-            </div>
+          <p className="text-sm text-[#626262]">
+            Don&lsquo;t have an account?{" "}
+            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
