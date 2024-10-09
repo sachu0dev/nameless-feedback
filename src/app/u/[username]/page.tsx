@@ -43,7 +43,7 @@ export default function SendMessage() {
   const [completion, setCompletion] = useState<string>(initialMessageString);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuggestLoading, setIsSuggestLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   const genAI = new GoogleGenerativeAI(apiKey as string);
   const model = genAI.getGenerativeModel({
@@ -73,7 +73,7 @@ export default function SendMessage() {
     } catch (error) {
       toast({
         title: "Error",
-        description: error.message,
+        description: (error as string) ?? "Failed to get suggested messages",
         variant: "destructive",
       });
     } finally {
@@ -155,7 +155,7 @@ export default function SendMessage() {
                           <StarIcon
                             key={value}
                             className={`h-6 w-6 cursor-pointer ${
-                              field.value >= value
+                              (field.value ?? -1) >= value
                                 ? "text-yellow-500"
                                 : "text-gray-400"
                             }`}

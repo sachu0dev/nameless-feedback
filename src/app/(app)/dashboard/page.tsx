@@ -29,13 +29,19 @@ const Page = () => {
     resolver: zodResolver(acceptMessageSchema),
   });
   const { register, watch, setValue } = form;
-  const acceptMessages = watch("acceptMessages");
+  const acceptMessages = watch("acceptMessage");
 
   const fetchAcceptMessage = useCallback(async () => {
     setIsSwitchLoading(true);
     try {
       const response = await axios.get<ApiResponse>("/api/accept-messages");
-      setValue("acceptMessages", response.data.isAcceptingMessages);
+
+      if (response.data.success) {
+        setValue(
+          "acceptMessage",
+          response.data.isAcceptingMessages ? false : true
+        );
+      }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
@@ -90,7 +96,7 @@ const Page = () => {
       const response = await axios.post<ApiResponse>("/api/accept-messages", {
         acceptMessages: !acceptMessages,
       });
-      setValue("acceptMessages", !acceptMessages);
+      setValue("acceptMessage", !acceptMessages);
       toast({
         title: response.data.message,
       });
@@ -181,7 +187,7 @@ export default FeedbackEmbed;
 
       <div className="mb-4">
         <Switch
-          {...register("acceptMessages")}
+          {...register("acceptMessage")}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
@@ -262,8 +268,8 @@ export default FeedbackEmbed;
                 Step-by-Step Instructions for React
               </h2>
               <p>
-                If you're using React, follow these steps to embed the feedback
-                component:
+                If you&lsquo;re using React, follow these steps to embed the
+                feedback component:
               </p>
               <ol className="list-decimal list-inside mb-4">
                 <li>
@@ -285,9 +291,9 @@ export default FeedbackEmbed;
               />
 
               <p className="mt-4">
-                Once you’ve created the <code>FeedbackEmbed</code> component,
-                you can now use it in your main React file. Here's how you can
-                use the component:
+                Once you&lsquo;ve created the <code>FeedbackEmbed</code>{" "}
+                component, you can now use it in your main React file.
+                Here&lsquo;s how you can use the component:
               </p>
 
               <CopyBlock
@@ -326,7 +332,7 @@ export default FeedbackEmbed;
         {messages.length > 0 ? (
           messages.map((message) => (
             <MessageCard
-              key={message._id}
+              key={message._id as string}
               message={message}
               onMessageDelete={handleDeleteMessage}
             />

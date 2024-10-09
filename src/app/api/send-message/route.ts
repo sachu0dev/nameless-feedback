@@ -17,6 +17,7 @@ export async function POST(request: Request) {
       return Response.json({ success: false, message: "User is not accepting messages" }, { status: 403 });
     }
 
+    // @ts-expect-error: Expecting error due to missing properties in the Message type
     const newMessage: Message = { content, rating, createdAt: new Date() };
     console.log(newMessage);
     

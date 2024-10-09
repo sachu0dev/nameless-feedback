@@ -1,5 +1,4 @@
 import HomePageButtons from "@/components/HomePageButtons";
-import { Button } from "@/components/ui/button";
 import Particles from "@/components/ui/particles";
 
 function Page() {
