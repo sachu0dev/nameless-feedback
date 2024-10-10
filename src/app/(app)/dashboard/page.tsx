@@ -118,7 +118,7 @@ const Page = () => {
   const { username } = session.user as User;
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
   const profileUrl = `${baseUrl}/u/${username}`;
-  const embedUrl = `${baseUrl}/embed/feedback?username=${username}`;
+  const embedUrl = `${baseUrl}/api/embed?username=${username}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
