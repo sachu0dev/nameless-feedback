@@ -14,9 +14,8 @@ import { Clipboard, Link, Loader2, RefreshCcw } from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { CopyBlock, dracula } from "react-code-blocks";
+import { useForm } from "react-hook-form";
 
 const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -25,11 +24,13 @@ const Page = () => {
   const [isHtml, setIsHtml] = useState<boolean>(true);
   const { toast } = useToast();
   const { data: session } = useSession();
-  const form = useForm<z.infer<typeof acceptMessageSchema>>({
+  const form = useForm({
     resolver: zodResolver(acceptMessageSchema),
   });
   const { register, watch, setValue } = form;
-  const acceptMessages = watch("acceptMessage");
+  const acceptMessages = watch("acceptMessages");
+
+  console.log(acceptMessages);
 
   const fetchAcceptMessage = useCallback(async () => {
     setIsSwitchLoading(true);
@@ -37,10 +38,7 @@ const Page = () => {
       const response = await axios.get<ApiResponse>("/api/accept-messages");
 
       if (response.data.success) {
-        setValue(
-          "acceptMessage",
-          response.data.isAcceptingMessages ? false : true
-        );
+        setValue("acceptMessages", response.data.isAcceptingMessages);
       }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -96,7 +94,7 @@ const Page = () => {
       const response = await axios.post<ApiResponse>("/api/accept-messages", {
         acceptMessages: !acceptMessages,
       });
-      setValue("acceptMessage", !acceptMessages);
+      setValue("acceptMessages", !acceptMessages);
       toast({
         title: response.data.message,
       });
@@ -187,7 +185,7 @@ export default FeedbackEmbed;
 
       <div className="mb-4">
         <Switch
-          {...register("acceptMessage")}
+          {...register("acceptMessages")}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}

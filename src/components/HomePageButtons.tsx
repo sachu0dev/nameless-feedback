@@ -39,7 +39,7 @@ const HomePageButtons = () => {
           variant={"outline"}
           size={"lg"}
           className="mt-4 flex-1 space-x-2"
-          onClick={() => router.push("/signup")}
+          onClick={() => router.push("/sign-up")}
         >
           <span>Sign Up</span>
           <MoveUpRight className="h-5 w-5" />
