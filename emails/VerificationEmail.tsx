@@ -26,7 +26,7 @@ export default function VerificationEmail({
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`https://res.cloudinary.com/dijtcmvrm/image/upload/f_auto,q_auto/wivn3fndzqkw1rrc2ywv`}
+            src={`https://res.cloudinary.com/dijtcmvrm/image/upload/f_auto,q_auto/zbx4waahb8y74n03wfcm`}
             width="212"
             height="212"
             alt="Nameless Feedback"
