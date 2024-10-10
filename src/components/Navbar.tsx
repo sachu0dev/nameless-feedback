@@ -52,6 +52,17 @@ const Navbar = () => {
               Dashboard
             </Link>
           </li>
+          <li
+            className={`${
+              pathname === "/dashboard"
+                ? " bg-slate-100 dark:bg-slate-800 text-gray-500"
+                : ""
+            } rounded-md py-1 px-2`}
+          >
+            <Link className="flex items-center" href="/iframe">
+              IFrame
+            </Link>
+          </li>
         </ul>
         {session ? (
           <>
