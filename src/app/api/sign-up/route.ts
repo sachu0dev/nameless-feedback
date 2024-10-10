@@ -23,6 +23,7 @@ export async function POST(request: Request) {
         existingUserVerifiedByEmail.verifyCode = verifyCode;
         existingUserVerifiedByEmail.verifyCodeExpireAt = new Date(Date.now()+ 3600000);
         existingUserVerifiedByEmail.password = hashedPassword;
+        existingUserVerifiedByEmail.username = username;
         await existingUserVerifiedByEmail.save();
       }
     } else {
