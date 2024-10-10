@@ -62,10 +62,6 @@ VerificationEmail.PreviewProps = {
 const main = {
   backgroundColor: "#ffffff",
   fontFamily: "HelveticaNeue,Helvetica,Arial,sans-serif",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  minHeight: "100vh",
 };
 
 const container = {
@@ -77,6 +73,11 @@ const container = {
   maxWidth: "500px",
   margin: "0 auto",
   padding: "68px 0 130px",
+  display: "flex",
+  flexDirection: "column" as const,
+  alignItems: "center",
+  textAlign: "center" as const,
+  justifycontent: "center",
 };
 
 const logo = {
