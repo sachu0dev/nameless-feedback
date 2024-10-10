@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Loader2, Star as StarIcon } from "lucide-react";
+import { Bot, Loader2, Star as StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CardHeader, CardContent, Card } from "@/components/ui/card";
@@ -159,7 +159,7 @@ export default function SendMessage() {
                                 ? "text-yellow-500"
                                 : "text-gray-400"
                             }`}
-                            onClick={() => handleStarClick(value)} // Set the rating on click
+                            onClick={() => handleStarClick(value)}
                           />
                         ))}
                       </div>
@@ -212,7 +212,8 @@ export default function SendMessage() {
             className="my-4"
             disabled={isSuggestLoading}
           >
-            Suggest Messages
+            <Bot />
+            <span className="ml-2">Suggest Messages</span>
           </Button>
           <p>Click on any message below to select it.</p>
         </div>

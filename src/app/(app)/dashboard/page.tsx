@@ -16,6 +16,12 @@ import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import { CopyBlock, dracula } from "react-code-blocks";
 import { useForm } from "react-hook-form";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Page = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -29,8 +35,6 @@ const Page = () => {
   });
   const { register, watch, setValue } = form;
   const acceptMessages = watch("acceptMessages");
-
-  console.log(acceptMessages);
 
   const fetchAcceptMessage = useCallback(async () => {
     setIsSwitchLoading(true);
@@ -133,7 +137,8 @@ const Page = () => {
   const JsxData = {
     step1: {
       code: `import React from 'react';
-      
+      import { to } from '../../../../.next/static/chunks/main-app';
+
 const FeedbackEmbed = () => {
     return (
         <iframe
@@ -167,7 +172,9 @@ export default FeedbackEmbed;
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 rounded w-full max-w-6xl border">
       <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
       <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>
+        <h2 className="text-lg font-semibold mb-2 text-gray-600 dark:text-slate-300">
+          Copy Your Unique Link
+        </h2>
         <div className="flex items-center">
           <Input
             type="text"
@@ -190,126 +197,141 @@ export default FeedbackEmbed;
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
         />
-        <span className="ml-2">
+        <span className="ml-2 text-gray-600 dark:text-slate-300">
           Accept Messages: {acceptMessages ? "On" : "Off"}
         </span>
       </div>
       <Separator />
 
       <div className="my-4">
-        <h1 className="text-2xl font-bold mb-4">
-          Display Feedback on Your Website
-        </h1>
-        <p>
-          You can embed feedback on your website in two ways: by using a simple
-          HTML iframe or by integrating it into a React component. Follow the
-          steps below to add feedback to your project.
-        </p>
-
-        <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 rounded w-full max-w-6xl border">
-          <div className="w-full flex justify-center">
-            <div className="flex bg-slate-100 dark:bg-slate-800 rounded m-5 p-1 gap-2">
-              <div
-                className={`bg-slate-200 dark:bg-slate-700 px-2 rounded w-[60px] flex justify-center items-center cursor-pointer ${
-                  isHtml ? "font-bold" : "opacity-50"
-                }`}
-                onClick={() => setIsHtml(true)}
-              >
-                HTML
-              </div>
-              <div
-                className={`bg-slate-200 dark:bg-slate-700 px-2 rounded w-[60px] flex justify-center items-center cursor-pointer ${
-                  !isHtml ? "font-bold" : "opacity-50"
-                }`}
-                onClick={() => setIsHtml(false)}
-              >
-                JSX
-              </div>
-            </div>
-          </div>
-
-          {isHtml ? (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">
-                Step-by-Step Instructions for HTML
-              </h2>
-              <p>
-                If you prefer to add feedback using HTML, follow these steps:
-              </p>
-              <ol className="list-decimal list-inside mb-4">
-                <li>
-                  Copy the HTML code below and paste it into the desired
-                  location in your HTML file where you want the feedback to
-                  appear.
-                </li>
-                <li>
-                  Ensure that your website is able to embed the feedback by
-                  adjusting any iframe restrictions.
-                </li>
-              </ol>
-
-              <CopyBlock
-                text={HtmlData.code}
-                language={HtmlData.language}
-                showLineNumbers={HtmlData.showLineNumbers}
-                theme={dracula}
-                wrapLongLines={true}
-              />
-              <p className="mt-4">
-                Once you add this code to your website, the feedback section
-                will be embedded and visible wherever you place it.
-              </p>
-            </div>
-          ) : (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">
-                Step-by-Step Instructions for React
-              </h2>
-              <p>
-                If you&lsquo;re using React, follow these steps to embed the
-                feedback component:
-              </p>
-              <ol className="list-decimal list-inside mb-4">
-                <li>
-                  Create a new React component called <code>FeedbackEmbed</code>{" "}
-                  that will be used to display the feedback.
-                </li>
-                <li>
-                  Copy and paste the following code into your new{" "}
-                  <code>FeedbackEmbed.js</code> or <code>.tsx</code> file:
-                </li>
-              </ol>
-
-              <CopyBlock
-                text={JsxData.step1.code}
-                language={JsxData.step1.language}
-                showLineNumbers={JsxData.step1.showLineNumbers}
-                theme={dracula}
-                wrapLongLines={true}
-              />
-
-              <p className="mt-4">
-                Once you&lsquo;ve created the <code>FeedbackEmbed</code>{" "}
-                component, you can now use it in your main React file.
-                Here&lsquo;s how you can use the component:
-              </p>
-
-              <CopyBlock
-                text={JsxData.step2.code}
-                language={JsxData.step2.language}
-                showLineNumbers={JsxData.step2.showLineNumbers}
-                theme={dracula}
-                wrapLongLines={true}
-              />
-
-              <p className="mt-4">
-                Now, the feedback section will be embedded in your React
-                application wherever you use the <code>FeedbackEmbed</code>{" "}
-                component.
-              </p>
-            </div>
-          )}
+        <div className="flex flex-col items-center">
+          <h1 className="text-xl sm:text-2xl font-bold mb-4">
+            Display Feedback on Your Website
+          </h1>
+          <p className="text-sm sm:text-base  text-gray-600 dark:text-slate-300 text-center">
+            You can embed feedback on your website in two ways: by using a
+            simple HTML iframe or by integrating it into a React component.
+            Follow the steps below to add feedback to your project.
+          </p>
         </div>
+
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <span className="text-lg">Show Steps to Add to your Website</span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="my-8 mx-4 sm:mx-6 md:mx-8 lg:mx-auto p-4 sm:p-6 rounded-lg w-full max-w-4xl border">
+                <div className="w-full flex justify-center">
+                  <div className="flex bg-slate-100 dark:bg-slate-800 rounded m-2 sm:m-5 p-1 gap-2">
+                    <div
+                      className={`bg-slate-200 dark:bg-slate-700 px-2 rounded w-[50px] sm:w-[60px] flex justify-center items-center cursor-pointer ${
+                        isHtml ? "font-bold" : "opacity-50"
+                      }`}
+                      onClick={() => setIsHtml(true)}
+                    >
+                      HTML
+                    </div>
+                    <div
+                      className={`bg-slate-200 dark:bg-slate-700 px-2 rounded w-[50px] sm:w-[60px] flex justify-center items-center cursor-pointer ${
+                        !isHtml ? "font-bold" : "opacity-50"
+                      }`}
+                      onClick={() => setIsHtml(false)}
+                    >
+                      JSX
+                    </div>
+                  </div>
+                </div>
+
+                {isHtml ? (
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-semibold mb-2 text-gray-600 dark:text-slate-300">
+                      Step-by-Step Instructions for HTML
+                    </h2>
+                    <p className="text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      If you prefer to add feedback using HTML, follow these
+                      steps:
+                    </p>
+                    <ol className="list-decimal list-inside mb-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      <li>
+                        Copy the HTML code below and paste it into the desired
+                        location in your HTML file where you want the feedback
+                        to appear.
+                      </li>
+                      <li>
+                        Ensure that your website is able to embed the feedback
+                        by adjusting any iframe restrictions.
+                      </li>
+                    </ol>
+
+                    <CopyBlock
+                      text={HtmlData.code}
+                      language={HtmlData.language}
+                      showLineNumbers={HtmlData.showLineNumbers}
+                      theme={dracula}
+                      wrapLongLines={true}
+                    />
+
+                    <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      Once you add this code to your website, the feedback
+                      section will be embedded and visible wherever you place
+                      it.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-semibold mb-2">
+                      Step-by-Step Instructions for React
+                    </h2>
+                    <p className="text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      If you&lsquo;re using React, follow these steps to embed
+                      the feedback component:
+                    </p>
+                    <ol className="list-decimal list-inside mb-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      <li>
+                        Create a new React component called{" "}
+                        <code>FeedbackEmbed</code> that will be used to display
+                        the feedback.
+                      </li>
+                      <li>
+                        Copy and paste the following code into your new{" "}
+                        <code>FeedbackEmbed.js</code> or <code>.tsx</code> file:
+                      </li>
+                    </ol>
+
+                    <CopyBlock
+                      text={JsxData.step1.code}
+                      language={JsxData.step1.language}
+                      showLineNumbers={JsxData.step1.showLineNumbers}
+                      theme={dracula}
+                      wrapLongLines={true}
+                    />
+
+                    <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      Once you&lsquo;ve created the <code>FeedbackEmbed</code>{" "}
+                      component, you can now use it in your main React file.
+                      Here&lsquo;s how you can use the component:
+                    </p>
+
+                    <CopyBlock
+                      text={JsxData.step2.code}
+                      language={JsxData.step2.language}
+                      showLineNumbers={JsxData.step2.showLineNumbers}
+                      theme={dracula}
+                      wrapLongLines={true}
+                    />
+
+                    <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                      Now, the feedback section will be embedded in your React
+                      application wherever you use the{" "}
+                      <code>FeedbackEmbed</code> component.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
 
       <Button
