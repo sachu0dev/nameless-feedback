@@ -118,6 +118,7 @@ const Page = () => {
   const { username } = session.user as User;
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
   const profileUrl = `${baseUrl}/u/${username}`;
+  const embedUrl = `${baseUrl}/embed/feedback?username=${username}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
@@ -129,7 +130,10 @@ const Page = () => {
 
   // Define HtmlData and JsxData inside the component
   const HtmlData = {
-    code: `<iframe src="\`http://localhost:5000/embed/feedback?username=${username}\`" width="100%" height="500px" style="border:none;"></iframe>`,
+    code: `<iframe title="User Feedback" 
+    src={\`${embedUrl}\`} 
+    width="100%" height="500px" style="border:none">
+</iframe>`,
     language: "html",
     showLineNumbers: true,
   };
@@ -137,13 +141,12 @@ const Page = () => {
   const JsxData = {
     step1: {
       code: `import React from 'react';
-      import { to } from '../../../../.next/static/chunks/main-app';
 
 const FeedbackEmbed = () => {
     return (
         <iframe
             title="User Feedback"
-            src={\`http://localhost:5000/embed/feedback?username=${username}\`}
+            src={\`${embedUrl}\`}
             width="100%"
             height="500"
             style={{ border: 'none' }}

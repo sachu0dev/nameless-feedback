@@ -95,7 +95,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
             />
           ))}
         </div>
-        <div className="text-sm">
+        <div className="text-sm text-gray-400 dark:text-slate-600">
           {dayjs(message.createdAt).format("MMM D, YYYY h:mm A")}
         </div>
       </CardContent>
