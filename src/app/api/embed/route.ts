@@ -2,7 +2,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get('username');
     
-    const backendUrl = 'https://nameless-feedback.vercel.app'; // Replace with your actual backend URL
+    const backendUrl = 'https://nameless-feedback.vercel.app';
   
     // Add CORS headers for cross-origin access
     const headers = {
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
   
                       data.feedback.forEach(feedback => {
                           const feedbackItem = document.createElement('div');
-                          feedbackItem.className = 'p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50 dark:bg-gray-800';
+                          feedbackItem.className = 'p-4 border border-gray-300 rounded-lg shadow-sm bg-gray-50 dark:bg-gray-800 flex-1';
                           feedbackItem.innerHTML = \`
                               <h4 class="font-semibold text-lg">\${feedback.content.trim()}</h4>
                               <div class="flex justify-between">
