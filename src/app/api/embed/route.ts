@@ -2,7 +2,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get('username');
     
-    const backendUrl = 'https://nameless-feedback.vercel.app';
+    const backendUrl = 'https://nameless.sushilcode.lol/';
   
     // Add CORS headers for cross-origin access
     const headers = {
