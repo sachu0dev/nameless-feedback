@@ -172,7 +172,7 @@ export default FeedbackEmbed;
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 rounded w-full max-w-6xl border">
+    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 rounded w-full max-w-[100vw] border">
       <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2 text-gray-600 dark:text-slate-300">
@@ -224,11 +224,11 @@ export default FeedbackEmbed;
               <span className="text-lg">Show Steps to Add to your Website</span>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="my-8 mx-4 sm:mx-6 md:mx-8 lg:mx-auto p-4 sm:p-6 rounded-lg w-full max-w-4xl border">
+              <div className="my-8 mx-2 sm:mx-4 md:mx-6 lg:mx-auto p-4 sm:p-6 rounded-lg w-full max-w-4xl border">
                 <div className="w-full flex justify-center">
-                  <div className="flex bg-slate-100 dark:bg-slate-800 rounded m-2 sm:m-5 p-1 gap-2">
+                  <div className="flex bg-slate-100 dark:bg-slate-800 rounded m-2 sm:m-4 p-1 gap-1 sm:gap-2">
                     <div
-                      className={`bg-slate-200 dark:bg-slate-700 px-2 rounded w-[50px] sm:w-[60px] flex justify-center items-center cursor-pointer ${
+                      className={`bg-slate-200 dark:bg-slate-700 px-2 sm:px-4 rounded w-[40px] sm:w-[50px] flex justify-center items-center text-sm sm:text-base cursor-pointer ${
                         isHtml ? "font-bold" : "opacity-50"
                       }`}
                       onClick={() => setIsHtml(true)}
@@ -236,7 +236,7 @@ export default FeedbackEmbed;
                       HTML
                     </div>
                     <div
-                      className={`bg-slate-200 dark:bg-slate-700 px-2 rounded w-[50px] sm:w-[60px] flex justify-center items-center cursor-pointer ${
+                      className={`bg-slate-200 dark:bg-slate-700 px-2 sm:px-4 rounded w-[40px] sm:w-[50px] flex justify-center items-center text-sm sm:text-base cursor-pointer ${
                         !isHtml ? "font-bold" : "opacity-50"
                       }`}
                       onClick={() => setIsHtml(false)}
@@ -248,14 +248,14 @@ export default FeedbackEmbed;
 
                 {isHtml ? (
                   <div>
-                    <h2 className="text-lg sm:text-xl font-semibold mb-2 text-gray-600 dark:text-slate-300">
+                    <h2 className="text-base sm:text-lg font-semibold mb-2 text-gray-600 dark:text-slate-300">
                       Step-by-Step Instructions for HTML
                     </h2>
-                    <p className="text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-slate-400">
                       If you prefer to add feedback using HTML, follow these
                       steps:
                     </p>
-                    <ol className="list-decimal list-inside mb-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                    <ol className="list-decimal list-inside mb-4 text-xs sm:text-sm text-gray-500 dark:text-slate-400">
                       <li>
                         Copy the HTML code below and paste it into the desired
                         location in your HTML file where you want the feedback
@@ -275,7 +275,7 @@ export default FeedbackEmbed;
                       wrapLongLines={true}
                     />
 
-                    <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                    <p className="mt-4 text-xs sm:text-sm text-gray-500 dark:text-slate-400">
                       Once you add this code to your website, the feedback
                       section will be embedded and visible wherever you place
                       it.
@@ -283,14 +283,14 @@ export default FeedbackEmbed;
                   </div>
                 ) : (
                   <div>
-                    <h2 className="text-lg sm:text-xl font-semibold mb-2">
+                    <h2 className="text-base sm:text-lg font-semibold mb-2 text-gray-600 dark:text-slate-300">
                       Step-by-Step Instructions for React
                     </h2>
-                    <p className="text-sm sm:text-base text-gray-500 dark:text-slate-400">
-                      If you&lsquo;re using React, follow these steps to embed
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-slate-400">
+                      If you&rsquo;re using React, follow these steps to embed
                       the feedback component:
                     </p>
-                    <ol className="list-decimal list-inside mb-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                    <ol className="list-decimal list-inside mb-4 text-xs sm:text-sm text-gray-500 dark:text-slate-400">
                       <li>
                         Create a new React component called{" "}
                         <code>FeedbackEmbed</code> that will be used to display
@@ -310,10 +310,10 @@ export default FeedbackEmbed;
                       wrapLongLines={true}
                     />
 
-                    <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
-                      Once you&lsquo;ve created the <code>FeedbackEmbed</code>{" "}
+                    <p className="mt-4 text-xs sm:text-sm text-gray-500 dark:text-slate-400">
+                      Once you&rsquo;ve created the <code>FeedbackEmbed</code>{" "}
                       component, you can now use it in your main React file.
-                      Here&lsquo;s how you can use the component:
+                      Here&rsquo;s how you can use the component:
                     </p>
 
                     <CopyBlock
@@ -324,7 +324,7 @@ export default FeedbackEmbed;
                       wrapLongLines={true}
                     />
 
-                    <p className="mt-4 text-sm sm:text-base text-gray-500 dark:text-slate-400">
+                    <p className="mt-4 text-xs sm:text-sm text-gray-500 dark:text-slate-400">
                       Now, the feedback section will be embedded in your React
                       application wherever you use the{" "}
                       <code>FeedbackEmbed</code> component.
