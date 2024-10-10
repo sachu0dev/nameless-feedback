@@ -1,3 +1,5 @@
+import { User } from "next-auth";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const page = () => {
@@ -10,10 +12,16 @@ const page = () => {
 };
 
 const FeedbackEmbed = () => {
+  const { data: session } = useSession();
+  if (!session || !session.user) return <div>Please login</div>;
+
+  const { username } = session.user as User;
+  const baseUrl = `${window.location.protocol}//${window.location.host}`;
+  const embedUrl = `${baseUrl}/api/embed?username=${username}`;
   return (
     <iframe
       title="User Feedback"
-      src={`http://localhost:3000/api/embed/feedback?username=sushil`}
+      src={`${embedUrl}`}
       width="100%"
       height="500"
       style={{ border: "none" }}
