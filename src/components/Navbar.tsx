@@ -54,7 +54,7 @@ const Navbar = () => {
           </li>
           <li
             className={`${
-              pathname === "/dashboard"
+              pathname === "/iframe"
                 ? " bg-slate-100 dark:bg-slate-800 text-gray-500"
                 : ""
             } rounded-md py-1 px-2`}
