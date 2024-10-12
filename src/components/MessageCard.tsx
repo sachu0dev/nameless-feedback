@@ -80,20 +80,21 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
       <CardContent className="flex justify-between">
         {/* Star rating display */}
         <div className="flex space-x-2 justify-center">
-          {[1, 2, 3, 4, 5].map((value) => (
-            <StarIcon
-              key={value}
-              className={`h-6 w-6 ${
-                message.rating >= 3
-                  ? message.rating >= value
-                    ? "text-yellow-500"
+          {message.rating !== -1 &&
+            [1, 2, 3, 4, 5].map((value) => (
+              <StarIcon
+                key={value}
+                className={`h-6 w-6 ${
+                  message.rating >= 3
+                    ? message.rating >= value
+                      ? "text-yellow-500"
+                      : "text-gray-400"
+                    : message.rating >= value
+                    ? "text-red-500"
                     : "text-gray-400"
-                  : message.rating >= value
-                  ? "text-red-500"
-                  : "text-gray-400"
-              }`}
-            />
-          ))}
+                }`}
+              />
+            ))}
         </div>
         <div className="text-sm text-gray-400 dark:text-slate-600">
           {dayjs(message.createdAt).format("MMM D, YYYY h:mm A")}
