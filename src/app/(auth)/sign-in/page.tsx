@@ -31,7 +31,7 @@ const Page = () => {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      identifier: "sushil",
+      identifier: "test",
       password: "123456",
     },
   });
@@ -52,9 +52,14 @@ const Page = () => {
         variant: "destructive",
       });
     }
-
-    if (result?.ok) {
-      router.replace("/dashboard");
+    if (result?.url) {
+      router.push("/dashboard");
+    } else {
+      toast({
+        title: "Login failed",
+        description: "something went wrong pls reload the page",
+        variant: "destructive",
+      });
     }
   };
 
