@@ -65,7 +65,7 @@ const main = {
 };
 
 const container = {
-  backgroundColor: "##1F1F1F",
+  backgroundColor: "#FFFFFF",
   border: "1px solid #eee",
   borderRadius: "5px",
   boxShadow: "0 5px 10px rgba(20,50,70,.2)",
@@ -82,6 +82,7 @@ const container = {
 
 const logo = {
   margin: "0 auto",
+  filter: "invert(1)",
 };
 
 const tertiary = {
