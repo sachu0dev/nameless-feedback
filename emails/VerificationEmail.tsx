@@ -60,7 +60,7 @@ VerificationEmail.PreviewProps = {
 } as VerificationEmailProps;
 
 const main = {
-  backgroundColor: "#ffffff",
+  backgroundColor: "#1F1F1F",
   fontFamily: "HelveticaNeue,Helvetica,Arial,sans-serif",
 };
 
