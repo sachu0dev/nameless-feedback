@@ -57,9 +57,26 @@ const Page = () => {
     } else {
       toast({
         title: "Login failed",
-        description: "something went wrong pls reload the page",
+        description: "Something went wrong. Please reload the page.",
         variant: "destructive",
       });
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsSubmitting(true);
+    const result = await signIn("google", { redirect: false });
+    setIsSubmitting(false);
+    if (result?.error) {
+      console.log(result?.error);
+      toast({
+        title: "Login failed",
+        description: "Unable to sign in with Google",
+        variant: "destructive",
+      });
+    }
+    if (result?.url) {
+      router.push("/dashboard");
     }
   };
 
@@ -139,6 +156,24 @@ const Page = () => {
                 </>
               ) : (
                 "Sign in"
+              )}
+            </Button>
+            <Button
+              onClick={handleGoogleSignIn}
+              disabled={isSubmitting}
+              className={`mb-4 bg-[#0173DC] w-full dark:bg-[#005bb5] dark:text-white text-white font-semibold 
+              py-2 px-4 rounded-lg transition-all duration-200 transform 
+              shadow-[0_4px_6px_rgba(0,0,0,0.3),0_1px_3px_rgba(0,0,0,0.1)] 
+              hover:shadow-[0_6px_8px_rgba(0,0,0,0.4),0_2px_4px_rgba(0,0,0,0.2)] 
+              active:translate-y-1 active:shadow-[0_2px_4px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.1)]`}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </>
+              ) : (
+                "Login with Google"
               )}
             </Button>
           </form>
