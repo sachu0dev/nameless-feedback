@@ -158,10 +158,12 @@ const Page = () => {
                 "Sign in"
               )}
             </Button>
+            <span className="w-full flex justify-center">or</span>
             <Button
               onClick={handleGoogleSignIn}
               disabled={isSubmitting}
-              className={`mb-4 bg-[#0173DC] w-full dark:bg-[#005bb5] dark:text-white text-white font-semibold 
+              variant={"outline"}
+              className={`mb-4  w-full bg-[] dark:bg-[#0D0D0D] text-black dark:text-white  font-semibold 
               py-2 px-4 rounded-lg transition-all duration-200 transform 
               shadow-[0_4px_6px_rgba(0,0,0,0.3),0_1px_3px_rgba(0,0,0,0.1)] 
               hover:shadow-[0_6px_8px_rgba(0,0,0,0.4),0_2px_4px_rgba(0,0,0,0.2)] 
@@ -173,7 +175,15 @@ const Page = () => {
                   Please wait
                 </>
               ) : (
-                "Login with Google"
+                <>
+                  <Image
+                    src="/logo/google.svg"
+                    width={24}
+                    height={24}
+                    alt="google"
+                  />
+                  <span className="ml-2">Sign in with Google</span>
+                </>
               )}
             </Button>
           </form>
