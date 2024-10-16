@@ -6,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="w-full overflow-hidden">
+    <main className="w-full m-auto overflow-hidden">
       <Navbar />
       <main>{children}</main>
     </main>

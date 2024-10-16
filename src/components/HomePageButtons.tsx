@@ -41,7 +41,7 @@ const HomePageButtons = () => {
           className="mt-4 flex-1 space-x-2"
           onClick={() => router.push("/sign-up")}
         >
-          <span>Sign Up</span>
+          <span>Getting Started</span>
           <MoveUpRight className="h-5 w-5" />
         </Button>
       )}

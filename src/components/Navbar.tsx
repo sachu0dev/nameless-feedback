@@ -99,13 +99,13 @@ const Navbar = () => {
             <div className="flex space-x-4">
               <ThemeToggleMode />
 
-              <Link href="/sign-in">
+              <Link href="/sign-up">
                 <Button
-                  className="inline-flex h-10 animate-shimmer items-center justify-center rounded-md border px-6 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2
+                  className="inline-flex h-10 text-black animate-shimmer items-center justify-center rounded-md border px-6 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2
               border-slate-800 bg-[linear-gradient(110deg,#f9fafb,45%,#e5e7eb,55%,#f9fafb)] bg-[length:200%_100%] text -slate-900 focus:ring-slate-400 focus:ring-offset-slate-50
               dark:border-slate-700 dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] dark:text-slate-400 dark:focus:ring-slate-500 dark:focus:ring-offset-slate-900"
                 >
-                  SignIn
+                  SignUp
                 </Button>
               </Link>
               <button
