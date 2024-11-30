@@ -2,9 +2,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get('username');
     
-    const backendUrl = 'https://nameless.sushilcode.lol/';
+    const backendUrl = 'https://nameless.devbysushil.com';
   
-    // Add CORS headers for cross-origin access
     const headers = {
       'Content-Type': 'text/html',
       'Access-Control-Allow-Origin': '*',
